@@ -17,5 +17,4 @@ class connect
         return $conn;
     }
 }
-
 ?>
