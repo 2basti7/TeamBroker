@@ -19,7 +19,7 @@
 
 <body>
 <form action="search.php" method="get">
-    <img src="googleSmall.png" class="img-rounded" alt="google logo">
+    <img src="images/googleSmall.png" class="img-rounded" alt="google logo">
     <input type="search" name="q" value="<?= $_GET['q'] ?>">
     <input type="submit" value="Search!"/>
 </form>

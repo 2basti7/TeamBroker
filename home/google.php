@@ -24,7 +24,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-        <img src="google.png" class="img-rounded" alt="google logo">
+        <img src="images/google.png" class="img-rounded" alt="google logo">
         <br><br><br>
 
 

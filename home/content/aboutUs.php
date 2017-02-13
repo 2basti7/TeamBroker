@@ -9,7 +9,7 @@
 
 
     <div class="col-lg-4 col-sm-6 text-center">
-        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="2.jpg" alt="">
+        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="images/1.jpg" alt="">
         <h3>Sebastian Petter</h3>
         <h4 class="text-muted">Team leader</h4>
         <ul class="list-inline social-buttons">
@@ -23,7 +23,7 @@
 
     </div>
     <div class="col-lg-4 col-sm-6 text-center">
-        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="1.jpg" alt="">
+        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="images/1.jpg" alt="">
         <h3>Alexander Zimmer</h3>
         <h5 class="text-muted">-------</h5>
         <ul class="list-inline social-buttons">
@@ -37,7 +37,7 @@
 
     </div>
     <div class="col-lg-4 col-sm-6 text-center">
-        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="1.jpg" alt="">
+        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="images/1.jpg" alt="">
         <h3>Michael Bösch </h3>
         <h5 class="text-muted">-------</h5>
         <ul class="list-inline social-buttons">
@@ -52,7 +52,7 @@
 
     </div>
     <div class="col-lg-4 col-sm-6 text-center">
-        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="1.jpg" alt="">
+        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="images/1.jpg" alt="">
         <h3>Philipp </h3>
         <h5 class="text-muted">-------</h5>
         <ul class="list-inline social-buttons">
@@ -66,7 +66,7 @@
 
     </div>
     <div class="col-lg-4 col-sm-6 text-center">
-        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="1.jpg" alt="">
+        <img class="img-circle img-responsive img-center" width="200px" height="200px" src="images/1.jpg" alt="">
         <h3>Mohammed </h3>
         <h5 class="text-muted">----------</h5>
         <ul class="list-inline social-buttons">
