@@ -206,7 +206,7 @@ function getCurrentChangeByTickerAndDate($ticker, $date){
 
 	$conn = $con->con();
 
-	$sql = "SELECT CourseChange FROM dbo.table_current WHERE TICKER = '$ticker' AND (DATEPART(hh, Date) = $date) AND CourseChange != 100 ORDER BY DATE ASC";
+	$sql = "SELECT Change FROM dbo.table_current WHERE TICKER = '$ticker' AND (DATEPART(hh, Date) = $date) AND Change != 100 ORDER BY DATE ASC";
 	$stmt = sqlsrv_query( $conn, $sql );
 	if( $stmt === false) {
 		die( print_r( sqlsrv_errors(), true) );
@@ -216,7 +216,7 @@ function getCurrentChangeByTickerAndDate($ticker, $date){
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 	  
-		$change = $row['CourseChange'];
+		$change = $row['Change'];
 	
 		array_push($result, $change);
 	}
@@ -258,7 +258,7 @@ function getCurrentValues(){
 
 	$conn = $con->con();
 
-	$sql = "SELECT TOP 1000 CourseChange, Ticker FROM dbo.table_current WHERE DATE = (SELECT MAX(Date) Date FROM dbo.table_current) AND CourseChange != 0 ORDER BY NEWID()";
+	$sql = "SELECT TOP 1000 Change, Ticker FROM dbo.table_current WHERE DATE = (SELECT MAX(Date) Date FROM dbo.table_current) AND Change != 0 ORDER BY NEWID()";
 	$stmt = sqlsrv_query( $conn, $sql );
 	if( $stmt === false) {
 		die( print_r( sqlsrv_errors(), true) );
@@ -268,7 +268,7 @@ function getCurrentValues(){
 
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 	  
-		$change = $row['CourseChange'];
+		$change = $row['Change'];
 		$ticker = $row['Ticker'];
 		$arr = array("change" => $change, "ticker" => $ticker);
 	

@@ -1,7 +1,7 @@
 <?php
 class connect{
 	function con(){
-		$serverName = "DESKTOP-DJCMMRC"; //serverName\instanceName
+		$serverName = "BTN4NV04\PROJEKTE2016"; //serverName\instanceName
 		$connectionInfo = array( "Database"=>"TeamBroker");
 		$conn = sqlsrv_connect( $serverName, $connectionInfo);
 
