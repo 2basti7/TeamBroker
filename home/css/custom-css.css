@@ -15,7 +15,7 @@ td {
     padding: 0;
 }
 
-body{
+body {
     background-image: url(https://images8.alphacoders.com/370/370799.jpg);
 }
 
@@ -27,15 +27,15 @@ body{
  Image credits: unsplash.com
  */
 
-     /********************************/
-     /*       Fade Bs-carousel       */
-     /********************************/
- .fade-carousel {
-     position: relative;
-     margin-left: auto;
-     margin-right:auto;
-     height: 30vh;
- }
+/********************************/
+/*       Fade Bs-carousel       */
+/********************************/
+.fade-carousel {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30vh;
+}
 
 .fade-carousel .carousel-inner .item {
     height: 30vh;
@@ -96,7 +96,6 @@ body{
     opacity: .1;
 }
 
-
 /********************************/
 /*       Slides backgrounds     */
 /********************************/
@@ -104,7 +103,7 @@ body{
 .fade-carousel .slides .slide-2,
 .fade-carousel .slides .slide-3,
 .fade-carousel .slides .slide-4,
-.fade-carousel .slides .slide-5{
+.fade-carousel .slides .slide-5 {
     height: 100%;
     background-size: cover;
     background-position: center center;

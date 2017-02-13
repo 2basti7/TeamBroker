@@ -1,19 +1,19 @@
 <?php
-	require('db/Select.php');
+require('db/Select.php');
 
-	session_start();
-	//unset($_SESSION['favourites']);
-	if(!isset($_SESSION['favourites'])){
-		$fav = array();
-		$_SESSION['favourites'] = $fav;
-	}
-	//unset($_SESSION['favouriteCalculations']);
-	if(!isset($_SESSION['favouriteCalculations'])){
-		$fav = array();
-		$_SESSION['favouriteCalculations'] = $fav;
-	}
-	
-	$select = new Select();
+session_start();
+//unset($_SESSION['favourites']);
+if (!isset($_SESSION['favourites'])) {
+    $fav = array();
+    $_SESSION['favourites'] = $fav;
+}
+//unset($_SESSION['favouriteCalculations']);
+if (!isset($_SESSION['favouriteCalculations'])) {
+    $fav = array();
+    $_SESSION['favouriteCalculations'] = $fav;
+}
+
+$select = new Select();
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +37,6 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-    <!-- Css for fields to choose numbers with a custom spinner -->
-    <link href="css/number_spinner.css" rel="stylesheet">
 
     <!-- Please put all your self defined classes and id's in this file -->
     <link href="css/custom-css.css" rel="stylesheet">
@@ -50,17 +48,14 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Js for fields to choose numbers with a custom spinner -->
-    <script src="js/number_spinner.js"></script>
-
     <!-- file for custom javascript functions -->
     <script src="js/my.js"></script>
-	
-	<!-- file for search algorithm functions -->
-	<script src="js/DBsearch.js"></script>
-	
-	<!-- Chart.js -->
-	<script type="text/javascript" src="js/Chart.min.js"></script>
+
+    <!-- file for search algorithm functions -->
+    <script src="js/DBsearch.js"></script>
+
+    <!-- Chart.js -->
+    <script type="text/javascript" src="js/Chart.min.js"></script>
 
 
 </head>
@@ -75,8 +70,8 @@
                 <ul>
                     <!-- start menu div: put here all other sites in a list element -->
                     <div class="menu" style="margin-top: 40px;">
-					
-						<!-- getting started -->
+
+                        <!-- getting started -->
                         <li>
                             <a href="index.php?action=gettingStarted">Getting started<span
                                         class="fa fa-play pull-right"></span></a>
@@ -84,11 +79,11 @@
 
                         <!-- find a ticker -->
                         <li>
-                            <a href="index.php?action=searchTicker">Find  Ticker<span
+                            <a href="index.php?action=searchTicker">Find Ticker<span
                                         class="glyphicon glyphicon-search pull-right"></span></a>
                         </li>
-						
-						<!-- insert new ticker -->
+
+                        <!-- insert new ticker -->
                         <li>
                             <a href="index.php?action=insertNewTicker">Insert new Ticker<span
                                         class="glyphicon glyphicon-plus pull-right"></span></a>
@@ -104,13 +99,13 @@
                                 <ul class="nav nav-list">
                                     <li><a href="index.php?action=compareTwoTickers">Compare two tickers</a></li>
                                     <li><a href="index.php?action=oneAgainstAll">Compare one ticker against all</a></li>
-									<li><a href="index.php?action=liveData">Live Data</a></li>
-									<!--<li><a href="index.php?action=predictionForOneTicker">Get prediction for one ticker</a></li>-->
+                                    <li><a href="index.php?action=liveData">Live Data</a></li>
+                                    <!--<li><a href="index.php?action=predictionForOneTicker">Get prediction for one ticker</a></li>-->
                                 </ul>
                             </div>
                         </li>
 
-                        
+
                     </div>
 
                 </ul>
@@ -131,24 +126,29 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-							
+
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a style = "color:#fff; margin-top: 12px;" href="index.php?action=home" class="fa fa-2x"><img src="222.png" width="30px" height="27px" style = "position: relative; top: -3px;"> Team Broker</a>
+                                    <a style="color:#fff; margin-top: 12px;" href="index.php?action=home"
+                                       class="fa fa-2x"><img src="222.png" width="30px" height="27px"
+                                                             style="position: relative; top: -3px;"> Team Broker</a>
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    <a style = "color:#fff; margin-top: 12px;" class="glyphicon glyphicon-home" href="index.php?action=home"></a>
+                                    <a style="color:#fff; margin-top: 12px;" class="glyphicon glyphicon-home"
+                                       href="index.php?action=home"></a>
                                 </li>
                                 <li>
-                                    <a style = "color:#fff; margin-top: 12px;" class="fa fa-users pull-right" href="index.php?action=aboutUs"></a>
+                                    <a style="color:#fff; margin-top: 12px;" class="fa fa-users pull-right"
+                                       href="index.php?action=aboutUs"></a>
                                 </li>
                                 <li>
-                                    <a style = "color:#fff; margin-top: 12px;" class="glyphicon glyphicon-heart-empty" href="index.php?action=favourites"></a>
+                                    <a style="color:#fff; margin-top: 12px;" class="glyphicon glyphicon-heart-empty"
+                                       href="index.php?action=favourites"></a>
                                 </li>
                             </ul>
 
@@ -158,7 +158,7 @@
                     <!-- /.container -->
                 </nav>
                 <!-- end navbar top -->
-				
+
                 <?php
                 // get page content
                 if (!empty($_GET['action'])) {
@@ -174,16 +174,17 @@
                     include("content/home.php");
                 }
                 ?>
-				<!--<button class = "btn" style = "position: fixed; right: 15px; bottom: 15px; width">-->
-				<a id="#fixed-button" href="#" class="btn btn-dark btn-lg"style = "position: fixed; right: 15px; bottom: 15px;"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-				<!--</button>-->
+                <!--<button class = "btn" style = "position: fixed; right: 15px; bottom: 15px; width">-->
+                <a id="#fixed-button" href="#" class="btn btn-dark btn-lg"
+                   style="position: fixed; right: 15px; bottom: 15px;"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+                <!--</button>-->
             </div>
-			
+
 
             <!-- end content div -->
         </div>
     </div>
-	
+
 </div>
 
 </body>

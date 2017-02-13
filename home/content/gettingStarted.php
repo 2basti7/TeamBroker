@@ -27,11 +27,14 @@
                             </div>
                             <div id="collapsea" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    This website gives the user the option to find correlations between selected stocks. 
-The user can choose from a variety of ticker-symbols from different stock exchanges (e.g. Nasdaq, NYSE) 
-and get more information about them. The technique, that is used to find correlation, is cross-correlation.
-Cross-correlation is a method, which calculates the correlation-coefficient between two different signals with different
-time delays.
+                                    This website gives the user the option to find correlations between selected stocks.
+                                    The user can choose from a variety of ticker-symbols from different stock exchanges
+                                    (e.g. Nasdaq, NYSE)
+                                    and get more information about them. The technique, that is used to find
+                                    correlation, is cross-correlation.
+                                    Cross-correlation is a method, which calculates the correlation-coefficient between
+                                    two different signals with different
+                                    time delays.
 
                                 </div>
                             </div>
@@ -45,9 +48,11 @@ time delays.
                                 </h3>
                             </div>
                             <div id="collapseb" class="panel-collapse collapse">
-                                <div class="panel-body">Beside daily and general informations to selected stocks and companies, the user can choose from different calculation methods.
-For example, he can investigate the correlation of two stocks in a choosen timeframe. Additionaly he can compare a stock with over 5000
-other stocks and find the best correlating stocks out of these.
+                                <div class="panel-body">Beside daily and general informations to selected stocks and
+                                    companies, the user can choose from different calculation methods.
+                                    For example, he can investigate the correlation of two stocks in a choosen
+                                    timeframe. Additionaly he can compare a stock with over 5000
+                                    other stocks and find the best correlating stocks out of these.
                                 </div>
                             </div>
                         </div>
@@ -60,10 +65,14 @@ other stocks and find the best correlating stocks out of these.
                                 </h3>
                             </div>
                             <div id="collapsec" class="panel-collapse collapse">
-                                <div class="panel-body">To determine the correlation between two stocks, the method of cross-correlation is used. It describes the correlation between two signals x and y 
-with different time delays. That means signal x is not moved, while signal y gets shifted by a given value (delay). Then the correlation between theses 
-is calculated. The correlation-coefficient can have a value between -1 and 1. Values that are close to -1 describe a high negative relation, while values 
-that are close to 1 describe a high positive relation. To describe the correlation-coefficient, the following classification is used:
+                                <div class="panel-body">To determine the correlation between two stocks, the method of
+                                    cross-correlation is used. It describes the correlation between two signals x and y
+                                    with different time delays. That means signal x is not moved, while signal y gets
+                                    shifted by a given value (delay). Then the correlation between theses
+                                    is calculated. The correlation-coefficient can have a value between -1 and 1. Values
+                                    that are close to -1 describe a high negative relation, while values
+                                    that are close to 1 describe a high positive relation. To describe the
+                                    correlation-coefficient, the following classification is used:
                                     <ul>
                                         <li>>= 0.7 : strong significant</li>
                                         <li>>= 0.5 & <= 0.7 : moderate significant</li>
@@ -96,20 +105,24 @@ that are close to 1 describe a high positive relation. To describe the correlati
                             <div id="collapse_2_1" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item"><strong>Ticker (symbol):</strong> Ticker symbol from the database
+                                        <li class="list-group-item"><strong>Ticker (symbol):</strong> Ticker symbol from
+                                            the database
                                         </li>
-                                        <li class="list-group-item"><strong>Date:</strong> Start or end date for which we want to get the course changes for calculations
+                                        <li class="list-group-item"><strong>Date:</strong> Start or end date for which
+                                            we want to get the course changes for calculations
                                         </li>
-                                        <li class="list-group-item"><strong>Timeframe:</strong> Length of days which are used for calculating correlation 
+                                        <li class="list-group-item"><strong>Timeframe:</strong> Length of days which are
+                                            used for calculating correlation
                                         </li>
-                                       <!-- <li class="list-group-item"><strong>Shiftfenster:</strong> Anzahl der Werte die Verschoben werden: Dieser Wert stellt eine Untermenge der
-                                            Werte des globalen Zeitfensters dar. Da bei 100 Werten der Korrelationswert zu sehr
-                                            verzerrt werden würde, wird hier eine Auswahl getroffen. Dann wird aus dem globalen
-                                            Zeitfenster die Anzahl der Tage des Ereigniszeitraums geschnitten. Mit diesen Werten
-                                            wird dann die Kreuzkorrelation berechnet. Anschließnd wird der das
-                                            Betrachtungsfenster einen Tag weitergeschoben.-->
+                                        <!-- <li class="list-group-item"><strong>Shiftfenster:</strong> Anzahl der Werte die Verschoben werden: Dieser Wert stellt eine Untermenge der
+                                             Werte des globalen Zeitfensters dar. Da bei 100 Werten der Korrelationswert zu sehr
+                                             verzerrt werden würde, wird hier eine Auswahl getroffen. Dann wird aus dem globalen
+                                             Zeitfenster die Anzahl der Tage des Ereigniszeitraums geschnitten. Mit diesen Werten
+                                             wird dann die Kreuzkorrelation berechnet. Anschließnd wird der das
+                                             Betrachtungsfenster einen Tag weitergeschoben.-->
                                         </li>
-                                        <li class="list-group-item"><strong>Lag:</strong> Maximum delay which is used to calculate correlation
+                                        <li class="list-group-item"><strong>Lag:</strong> Maximum delay which is used to
+                                            calculate correlation
                                         </li>
                                     </ul>
                                 </div>

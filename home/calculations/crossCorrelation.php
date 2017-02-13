@@ -18,18 +18,18 @@ class crossCorrelation
     {
         $result = [[]];
 
-        for ($currentValue = 0; $currentValue < ($lengthOfCompletePeriod - $timeFrame -$lag); $currentValue++) {
+        for ($currentValue = 0; $currentValue < ($lengthOfCompletePeriod - $timeFrame - $lag); $currentValue++) {
             $ticker1_sliced = array_slice($ticker1, $currentValue, $timeFrame);
             //$ticker2_sliced = array_slice($ticker2, $currentValue, $timeFrame);
 
             for ($numberOfLags = 1; $numberOfLags <= $lag; $numberOfLags++) {
-				$ticker2_sliced = array_slice($ticker2, ($currentValue + $numberOfLags), $timeFrame); //new
+                $ticker2_sliced = array_slice($ticker2, ($currentValue + $numberOfLags), $timeFrame); //new
                 $result[$currentValue][$numberOfLags] = $this->crossCorr($ticker1_sliced, $ticker2_sliced, $numberOfLags);
             }
         }
         return $result;
     }
-	
+
     /**
      * @param $ticker1 ticker1 as already sliced array with a length of value timeFrame
      * @param $ticker2 ticker2 as already sliced array with a length of value timeFrame
@@ -65,11 +65,11 @@ class crossCorrelation
             $b2 = $b2 + pow($b, 2);
         }
         // correlation
-		if(sqrt($a2 * $b2) == 0){
-			$corr = 0;
-		}else{
-			$corr = $axb / sqrt($a2 * $b2);
-		}
+        if (sqrt($a2 * $b2) == 0) {
+            $corr = 0;
+        } else {
+            $corr = $axb / sqrt($a2 * $b2);
+        }
         return $corr;
     }
 }

@@ -4,13 +4,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
-$(function(){
-    $("#startDate").datepicker({ dateFormat: 'yy-mm-dd' });
-});
+    $(function () {
+        $("#startDate").datepicker({dateFormat: 'yy-mm-dd'});
+    });
 
-$(function(){
-    $("#lengthOfPeriod").datepicker({ dateFormat: 'yy-mm-dd' });
-});
+    $(function () {
+        $("#lengthOfPeriod").datepicker({dateFormat: 'yy-mm-dd'});
+    });
 </script>
 
 <div id="inputValuesDiv" class="col-md-12">
@@ -23,12 +23,12 @@ $(function(){
                     <div class="row">
 
                         <div class="col-lg-3">
-                            <label>Choose start date:</label0
-							><input type="text" id="lengthOfPeriod" value="" class="form-control"
-                                   placeholder="2016-02-25">
-                            
+                            <label>Choose start date:</label>
+                            ><input type="text" id="lengthOfPeriod" value="" class="form-control"
+                                    placeholder="2016-02-25">
+
                         </div>
-						<div class="col-lg-3">
+                        <div class="col-lg-3">
                             <label>Choose end date:</label>
                             <input type="text" id="startDate" value="" class="form-control"
                                    placeholder="2016-02-25">
@@ -104,60 +104,60 @@ $(function(){
         <div class="panel-heading" style="font-size: 1.1em">Resulting table</div>
         <div class="panel-body">
             <div class="row" style="margin-left:2px">
-			<div class="container">
-		<!--	<div class="row">
-                        <div class="col-lg-3 col-lg-offset-8">
-                            <button class="btn btn-primary" type="button" onclick="toggler('myContent');">
-                                Explanation for table colors
-                                <span class="caret"></span>
-                            </button>
-                            <div id="myContent" style="display: none; position:absolute;">
-                                <table class="table table-bordered"
-                                       style="border-collapse: collapse;border: 1px solid black; width: 200px">
-                                    <thead>
-                                    <tr>
-                                        <th style="border: 1px solid black">Color</th>
-                                        <th style="border: 1px solid black">Explanation</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td bgcolor="#009900" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Significant</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#00CC33" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Weak</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#A0C544" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Very Weak</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#ADA96E" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Very Weak</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#EE9A4D" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Insignificant</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#F88017" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Insignificant</td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#a52a2a" style="border: 1px solid black"></td>
-                                        <td style="border: 1px solid black">Insignificant</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-							</div>
-                        </div>
-                        </div>
-                    </div> -->
-					<div id="div_for_table" class="top-buffer">
-					</div>
+                <div class="container">
+                    <!--	<div class="row">
+                                    <div class="col-lg-3 col-lg-offset-8">
+                                        <button class="btn btn-primary" type="button" onclick="toggler('myContent');">
+                                            Explanation for table colors
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div id="myContent" style="display: none; position:absolute;">
+                                            <table class="table table-bordered"
+                                                   style="border-collapse: collapse;border: 1px solid black; width: 200px">
+                                                <thead>
+                                                <tr>
+                                                    <th style="border: 1px solid black">Color</th>
+                                                    <th style="border: 1px solid black">Explanation</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td bgcolor="#009900" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Significant</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#00CC33" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Weak</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#A0C544" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Very Weak</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#ADA96E" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Very Weak</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#EE9A4D" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Insignificant</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#F88017" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Insignificant</td>
+                                                </tr>
+                                                <tr>
+                                                    <td bgcolor="#a52a2a" style="border: 1px solid black"></td>
+                                                    <td style="border: 1px solid black">Insignificant</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div> -->
+                    <div id="div_for_table" class="top-buffer">
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,11 +8,11 @@ require_once 'Select.php';
 $con = new Select();
 echo "GETCOURSEBYTICKER<br>";
 $conn = $con->selectByTicker($ticker1, $date, $count, 0);
-print_r($conn); 
+print_r($conn);
 echo "<br>";
 $conn = $con->selectByTicker($ticker1, $date, $count, 1);
 $ticker = array_column($conn, 'closeCourse');
-print_r($conn); 
+print_r($conn);
 echo "<br>";
 print_r($ticker);
 
@@ -22,10 +22,10 @@ $conn = $con->getAllTickerInfo();
 
 echo "<br>";
 $conn = $con->getHighestCourses(10, 0);
-print_r($conn); 
+print_r($conn);
 
 echo "<br>";
 $conn = $con->getExchanges();
-print_r($conn); 
+print_r($conn);
 
 ?>
