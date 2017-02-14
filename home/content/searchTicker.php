@@ -1,8 +1,11 @@
+<!--display a list of all Tickers --> 
 <?php
+/* get all tickers from the db and count them */
 $allTickers = $select->getAllTickerInfo();
 $countTickers = count($allTickers);
 ?>
 <script>
+	/* show all tickers on first load of the page*/
     showResult("%");
 </script>
 <div class="col-md-12">
@@ -11,13 +14,14 @@ $countTickers = count($allTickers);
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-4">
+                <!-- input field for db search. call method from js/DBsearch.js-->
                     <input class="form-control" type="text" size="30" onkeyup="showResult(this.value)"
                            placeholder="search ticker">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-
+                	<!-- result table for the db search-->
                     <table class="table" id="table">
                         <thead>
                         <tr>

@@ -1,13 +1,17 @@
+<!-- 
+    Starting point for the web-applicaton.
+    The rough structure is implemented on this page and the dependencies are included here as well.
+ -->
 <?php
 require('db/Select.php');
 
+// start a session to store the favourites
 session_start();
-//unset($_SESSION['favourites']);
+// init the favourites arrays
 if (!isset($_SESSION['favourites'])) {
     $fav = array();
     $_SESSION['favourites'] = $fav;
 }
-//unset($_SESSION['favouriteCalculations']);
 if (!isset($_SESSION['favouriteCalculations'])) {
     $fav = array();
     $_SESSION['favouriteCalculations'] = $fav;
@@ -37,10 +41,8 @@ $select = new Select();
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-
     <!-- Please put all your self defined classes and id's in this file -->
     <link href="css/custom-css.css" rel="stylesheet">
-
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -56,15 +58,11 @@ $select = new Select();
 
     <!-- Chart.js -->
     <script type="text/javascript" src="js/Chart.min.js"></script>
-
-
 </head>
-
 <body>
 <div class="container">
     <div class="row">
         <div class="wrapper">
-
             <!-- start side bar div-->
             <div class="side-bar">
                 <ul>
@@ -100,7 +98,6 @@ $select = new Select();
                                     <li><a href="index.php?action=compareTwoTickers">Compare two tickers</a></li>
                                     <li><a href="index.php?action=oneAgainstAll">Compare one ticker against all</a></li>
                                     <li><a href="index.php?action=liveData">Live Data</a></li>
-                                    <!--<li><a href="index.php?action=predictionForOneTicker">Get prediction for one ticker</a></li>-->
                                 </ul>
                             </div>
                         </li>
@@ -158,9 +155,8 @@ $select = new Select();
                     <!-- /.container -->
                 </nav>
                 <!-- end navbar top -->
-
                 <?php
-                // get page content
+                // includes different page content by evaluate the 'action' request.
                 if (!empty($_GET['action'])) {
                     $action = $_GET['action'];
                     $action = basename($action);
@@ -174,18 +170,13 @@ $select = new Select();
                     include("content/home.php");
                 }
                 ?>
-                <!--<button class = "btn" style = "position: fixed; right: 15px; bottom: 15px; width">-->
                 <a id="#fixed-button" href="#" class="btn btn-dark btn-lg"
                    style="position: fixed; right: 15px; bottom: 15px;"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
                 <!--</button>-->
             </div>
-
-
             <!-- end content div -->
         </div>
     </div>
-
 </div>
-
 </body>
 </html>

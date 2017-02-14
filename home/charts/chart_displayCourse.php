@@ -1,12 +1,11 @@
+<!-- display a course of a specific ticker with the aid of 'chart.js' -->
 <canvas id="myChart"></canvas>
 <?php
-//date_default_timezone_set('America/Los_Angeles');
+// get current date,course and the corresponding days of the ticker
 $courseDate = date('Y-m-d');
 $data = $select->selectByTicker2($tickerName, $courseDate, 30, 0);
 $stockData = array_column($data, 'closeCourse');
 $days = array_column($data, 'date');
-
-//$days = $con->getCourseDateByTicker($tickerName, $courseDate, 30, 1);
 ?>
 
 <script type="text/javascript">
@@ -15,12 +14,12 @@ $days = array_column($data, 'date');
     var stockData = <?php echo json_encode($stockData, JSON_PRETTY_PRINT) ?>;
     var label = <?php echo json_encode($tickerName, JSON_PRETTY_PRINT) ?>;
 
-    // colors must be configured for our needs
+    // use of 'chart.js' for display data
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            // php array as label (e.g. days)
+            // 
             labels: days,
             datasets: [
                 {

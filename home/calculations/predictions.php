@@ -1,3 +1,15 @@
+<!-- 
+    tries to make a prediction for the live data at a specific time.
+    Train data by classification of the course change of two tickers.
+    classification: ticker 1 goes up and ticker 2 goes up -> 0
+    (case)          ticker 1 goes up and ticker 2 stays equal -> 1
+                    ticker 1 goes up and ticker 2 goes down -> 2
+                    ticker 1 stays equal and ticker 2 goes up -> 3
+                    ...
+                    ticker 1 goes down and ticker 2 stays equal -> 7
+                    ticker 1 goes down and ticker 2 ggoes down -> 8.
+    After classifiation -> counts the appearance of every case to calculate the likelihood.
+ -->
 <?php
 $choosenTicker = $_POST['ticker1'];
 require_once '../db/Select.php';
@@ -14,25 +26,24 @@ if ($localTime < 16) {
 } else {
     $calcTime += 1;
 }
-//$calcTime = 21;
 $result = [];
 $myChange = "";
 // get the course change of the choosen ticker
 $CourseChangesOfTicker1 = $con->getCurrentChangeByTickerAndDate($choosenTicker, $calcTime);
 $CourseChangeOfTicker1 = array_pop($CourseChangesOfTicker1);
-//$likelihoods = $con->getLikelihood($choosenTicker,16);
+// classification of the choosen ticker and call the method to compare it with the other ticker
 switch (true) {
-    // große Änderung hoch
+    // high change up
     case $CourseChangeOfTicker1 >= 0.1:
         $myChange = '<span class="fa fa-arrow-up pull-right"></span>';
         calculationOfLikelihood($choosenTicker, $CourseChangesOfTicker1, $calcTime, 0);
         break;
-    // mimimale bis gleichbleibende Änderung (hoch&tief)
+    // stay equals
     case $CourseChangeOfTicker1 < 0.1 and $CourseChangeOfTicker1 > -0.1:
         calculationOfLikelihood($choosenTicker, $CourseChangesOfTicker1, $calcTime, 3);
         $myChange = '<span class="fa fa-arrow-right pull-right"></span>';
         break;
-    // größe Änderung runter
+    // high change down
     case $CourseChangeOfTicker1 <= -0.1:
         calculationOfLikelihood($choosenTicker, $CourseChangesOfTicker1, $calcTime, 6);
         $myChange = '<span class="fa fa-arrow-down pull-right"></span>';
@@ -41,31 +52,38 @@ switch (true) {
         echo "fehler: ";
         break;
 }
-
+/*
+    Function: calculationOfLikelihood($ticker, $ticker1Change, $choosenTime, $case).
+    Parameter:  ticker - the choosen ticker
+                ticker1Change - the change of the choosen ticker as array
+                choosenTime - the choosen time
+                case - the case -> 0 is UpUp, 1 is UpEquals, 2 is UpDown, 3 is EqualsUp, .. , 8 is DownDown
+    Compare the course change of the choosen ticker against the changes of all tickers in the db to categorize them. 
+    Count the appearance of the different cases to get a likelihood of occurrence.
+*/
 function calculationOfLikelihood($ticker, $ticker1Change, $choosenTime, $case)
 {
     global $con;
     $tickers = $con->getAllTickerInfo();
     $countTickers = count($tickers);
     $resultValueArray = [[]];
-
+    // initialize a helper array for the calculation
     for ($ArraySize2 = 0; $ArraySize2 < $countTickers; $ArraySize2++) {
         for ($ArraySize = 0; $ArraySize < 10; $ArraySize++) {
             $resultValueArray[$tickers[$ArraySize2]["ticker"]][$ArraySize] = 0;
         }
     }
+    // runs over all tickers (Ticker1 and Ticker 2)
     for ($varTicker = 0; $varTicker < $countTickers; $varTicker++) {
         $tickerName1 = $ticker;
         $tickerName2 = $tickers[$varTicker]["ticker"];
         $ticker2Change = $con->getCurrentChangeByTickerAndDate($tickerName2, ($choosenTime + 1));
         if (count($ticker1Change) != count($ticker2Change)) {
-            // echo count($ticker1Change)." : ";
-            // echo count($ticker2Change);
-            // echo "<br>";
             continue;
         }
         $arrayCount = count($ticker1Change);
         for ($day = 0; $day < $arrayCount; $day++) {
+            // convoluted switch-case to get the right combination of course changes (get the correct case)
             switch (true) {
                 case $ticker1Change[$day] >= 0.1:
                     switch (true) {
@@ -136,10 +154,18 @@ function calculationOfLikelihood($ticker, $ticker1Change, $choosenTime, $case)
         $resultValueArray[$tickers[$varTicker]["ticker"]][9] = $arrayCount;
     }
     global $result;
+    // get highest and lowest values of the result array
     $result[0] = highest($resultValueArray, $tickers, ($case));
     $result[1] = lowest($resultValueArray, $tickers, ($case + 2));
 }
 
+/*
+    Function: highest($arr, $tickerList, $case).
+    Parameter:  arr - a 2-dim. array for searching the highest value in it.
+                tickerList - array with all ticker informations.
+                case - the case -> 0 is UpUp, 1 is UpEquals, 2 is UpDown, 3 is EqualsUp, .. , 8 is DownDown.
+    Find the highest value in a 2-dim. array and store it with the related ticker name in a result array.
+*/
 function highest($arr, $tickerList, $case)
 {
     $result = [];
@@ -154,6 +180,13 @@ function highest($arr, $tickerList, $case)
     return $result;
 }
 
+/*
+    Function: lowest($arr, $tickerList, $case).
+    Parameter:  arr - a 2-dim. array for searching the highest value in it.
+                tickerList - array with all ticker informations.
+                case - the case -> 0 is UpUp, 1 is UpEquals, 2 is UpDown, 3 is EqualsUp, .. , 8 is DownDown.
+    Find the lowest value in a 2-dim. array and store it with the related ticker name in a result array.
+*/
 function lowest($arr, $tickerList, $case)
 {
     $result = [];
@@ -171,7 +204,7 @@ function lowest($arr, $tickerList, $case)
 
 ?>
 
-
+<!-- HTML part for visualize the result -->
 <div class="panel panel-info">
     <div class="panel-heading" id="test">Live data prediction for <a
                 href="index.php?action=displayTicker&ticker=<?php echo $choosenTicker ?>"><?php echo $choosenTicker ?></a>

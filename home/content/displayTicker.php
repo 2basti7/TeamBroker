@@ -1,4 +1,5 @@
 <?php
+// get ticker informations
 if (!empty($_GET['ticker'])) {
     $tickerName = $_GET['ticker'];
 } else {
@@ -6,8 +7,11 @@ if (!empty($_GET['ticker'])) {
 }
 $tickerInfo = $select->getTickerInfo("$tickerName");
 
+
+//get favourites from session array
 $favourites = $_SESSION['favourites'];
 
+// check, if favourite is set
 if (isset($_GET['fav'])) {
     if ($_GET['fav'] == 'true') {
         array_push($favourites, $tickerName);
@@ -23,12 +27,13 @@ if (isset($_GET['fav'])) {
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-2">
+            <!-- JS back button-->
             <input type="button" value="Back" onclick="window.history.back()"/>
         </div>
     </div>
     <br>
     <div class="panel panel-default">
-        <!--<div class="panel-heading">Ticker: <?php echo $tickerName; ?><a href="#" onclick="setFav(<?php echo $tickerName; ?>)"><span class="glyphicon glyphicon-heart pull-right"></a></div>-->
+        <!-- favourite button, different buttons for set and unset -->
         <?php
         if (in_array($tickerName, $favourites)) {
             echo '<div class="panel-heading" >Ticker:' . $tickerName . '<a href="index.php?action=displayTicker&ticker=' . $tickerName . '&fav=false"><span class="glyphicon glyphicon-heart pull-right"></a></div>';
@@ -45,6 +50,7 @@ if (isset($_GET['fav'])) {
                     <div class="panel panel-info">
                         <div class="panel-heading">additional informations</div>
                         <div class="panel-body">
+                            <!-- Display additional informations as table -->
                             <table class="table">
                                 <tbody>
                                 <tr>
@@ -90,6 +96,7 @@ if (isset($_GET['fav'])) {
                     <div class="panel panel-warning">
                         <div class="panel-heading">Current stock prize (last 30 days)</div>
                         <div class="panel-body">
+                            <!-- display course of the ticker-->
                             <?php include("charts/chart_displayCourse.php"); ?>
                         </div>
                     </div>
@@ -99,16 +106,3 @@ if (isset($_GET['fav'])) {
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    var fav = new Array();
-    function getFav() {
-        return fav;
-    }
-    function setFav(favValue) {
-        fav.push(favValue);
-        window.alert(favValue);
-    }
-    }
-
-</script>
