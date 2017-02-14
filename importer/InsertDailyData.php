@@ -1,5 +1,9 @@
 <?php
 
+/**
+* Importer for updating historical stock data 
+* Inserts historical stock data for all tickers in the database for the previous day.
+*/
 require_once 'Connect.php';
 require_once 'SelectTickerSymbols.php';
 
@@ -14,22 +18,28 @@ $tickerArray = $ticker->getTickerSymbols();
 $yesterday = date('d-m-Y', strtotime("-1day"));
 
 foreach($tickerArray as $ticker){
-	//echo($ticker."<br/>");
-	//$ticker = "AAPL";
 	getStockDataByTicker($ticker, $yesterday, $con, FALSE);
 }
 
 function getStockDataByTicker($ticker, $startDate, $con, $isForDaily){
+	//Save dateparts in array 
 	$startDateParts = explode("-", $startDate);
 	$day = 0;
 	$month = 1;
 	$year = 2;
 
 	echo $ticker."<br>";
+	//Url to yahoo finance api
 	$url = "http://ichart.finance.yahoo.com/table.csv?s=".$ticker."&a=".($startDateParts[$month] - 1)."&b=".$startDateParts[$day]."&c=".$startDateParts[$year]."&d=".($startDateParts[$month] - 1)."&e=".$startDateParts[$day]."&f=".$startDateParts[$year]."&g=d&ignore=.csv";
+	
+	//Check if status code for url is ok 
 	if(testUrl($url) == 200){
+		
+		//Open csv file from url and save in array with reverse order
 		$file = fopen($url, "r");
 		$csvAsArray = reverseCsv($file);
+		
+		//Get last course change to calculate change
 		$oldclose = 00.000000;
 		$select = "SELECT TOP 1 CloseCourse FROM dbo.table_historical WHERE Ticker = '$ticker' ORDER BY DATE DESC";
 		$get = sqlsrv_query($con, $select);
@@ -51,6 +61,7 @@ function getStockDataByTicker($ticker, $startDate, $con, $isForDaily){
 				$change = $change/$close;
 				$change = $change * 100;
 
+				//Insert query with values from csv
 				$insert = "INSERT INTO dbo.table_historical(Ticker, Date, OpenCourse, High, Low, CloseCourse, Volume, Change) VALUES('".$ticker."', '".$date."', '".$open."', '".$high."', '".$low."', '".$close."', '".$volume."', '".$change."')";
 				$query = sqlsrv_query($con, $insert);
 				if($query == FALSE)

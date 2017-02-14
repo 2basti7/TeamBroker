@@ -1,3 +1,5 @@
+<!-- used for entering values for one against all / all against one calculation -->
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -29,10 +31,6 @@
                             <input type="text" id="startDate" value="" class="form-control"
                                    placeholder="2016-02-25">
                         </div>
-                        <!--<div class="col-lg-3">
-                            <label>Select length of period:</label>
-                            <input type="text" id="lengthOfPeriod" class="form-control" value="40" min="1" max="24">
-                        </div>-->
 
                         <div class="col-lg-3">
                             <div class="form-group">
@@ -77,6 +75,7 @@
 
                 </div>
             </div>
+			<!-- button for starting the calculation -->
             <div class="row remove-button">
                 <div class="col-lg-1">
                     <button type="button" id="calc_one_against_all" class="btn btn-primary">Calculate</button>
