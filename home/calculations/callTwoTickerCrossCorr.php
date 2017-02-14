@@ -1,12 +1,16 @@
 <?php
+
+/* require crossCorrelation file in order to calculate the cross correlation */
 require_once 'crossCorrelation.php';
 $corr = new crossCorrelation();
 
+/* for calculating one ticker against all also include Select.php file */
 if (!isset($_POST["oneToAll"])) {
     include '../db/Select.php';
     $select = new Select();
 }
 
+/* custom method to convert the ordering of an array */
 function convert($arr)
 {
     $help = array();
@@ -22,34 +26,46 @@ function convert($arr)
     return $help;
 }
 
+
+/* fetch all input parameters from input fields in CompareTwoTickers or OneAgainstAll */
 $ticker1_symbol = strtoupper($_POST['ticker1']);
 $ticker2_symbol = strtoupper($_POST['ticker2']);
 $startDate = $_POST['startDate'];
 $lengthOfCompletePeriod = $_POST['lengthOfPeriod'];
 $lag = $_POST['lag'];
 $timeFrame = $_POST['timeFrame'];
+
+/* set calculation type to gradient method or not */
 $calculationType = false;
 if (isset($_POST['calculation_type'])) {
     $calculationType = $_POST['calculation_type'];
 }
 
+/* get data which is related to the given parameters */
 $dataTicker1 = $select->selectByTicker($ticker1_symbol, $startDate, $lengthOfCompletePeriod, 0);
-
 $dataTicker2 = $select->selectByTicker($ticker2_symbol, $startDate, $lengthOfCompletePeriod, 0);
+
 $enddate = $_POST['lengthOfPeriod'];
 $lengthOfCompletePeriod = count($dataTicker1);
+
+/* store course change values in $ticker1 */
 $ticker1 = array_column($dataTicker1, 'change');
 $ticker2 = array_column($dataTicker2, 'change');
 $dates = array_column($dataTicker1, 'date');
+
+/* if gradient method then convert arrays */
 if ($calculationType === "true") {
     $ticker1 = convert($ticker1);
     $ticker2 = convert($ticker2);
 }
 
+/* call cross correlation function to calculate all cross correlation coefficients */
 $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag, count($dataTicker1));
 
 ?>
 
+
+<!-- build table which displays all cross correlation coefficients. Rows as a specific day in given interval and columns as lag value -->
 <div class="row" id="tableWithValues" style="margin-left: 2px;">
     <table class="table table-bordered"
            style="width:60%; border-collapse: collapse;border: 1px solid black">
@@ -67,7 +83,7 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
         </thead>
         <tbody>
         <?php
-        // build the table
+        /* buld table only if calculation succeded */
         if (count($result) > 1) {
 
             for ($row = 0; $row < $lengthOfCompletePeriod - $timeFrame - $lag; $row++) {
@@ -80,6 +96,7 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
                         $linkParametersForChart = "index.php?action=chart&ticker1=" . $ticker1_symbol . "&ticker2=" . $ticker2_symbol . "&lag=" . $col . "&date="
                             . $dayInTableColumn . "&timeFrame=" . $timeFrame . "&actualValue=" . $result[$row][$col] . "&calculation_type=" . $calculationType;
 
+                        /* every cell in the table contains a link which forwards to the related line charts */
                         if ($result[$row][$col] >= 0.7) {
                             echo '<td align="center" style="border: 1px solid black" bgcolor="#009900"><a class="addTooltip" title="Significant" style="color:rgb(255,255,255)" href="' . $linkParametersForChart . '">' . round($result[$row][$col], 4) . '</a></td>';
                         } elseif ($result[$row][$col] >= 0.5 && $result[$row][$col] < 0.7) {
@@ -105,6 +122,8 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
             echo '<div class="alert alert-danger col-lg-1" style="width:280px"><strong>Not successfull!</strong> Please specify a time period longer than timeframe + lag!</div>';
         }
 
+
+        /* custom function to find maximum and minimum in an multidimensional array */
         function findMax($array)
         {
             if (is_array($array)) {
@@ -129,6 +148,8 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
             }
         }
 
+
+        /* get the highest and lowest value in the table with the related position */
         if (count($result) > 1) {
             $max = findMax($result);
             $min = findMin($result);
@@ -151,6 +172,7 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
                 }
             }
 
+            /* build the links for http requests to draw the charts */
             $linkHighestValue = "index.php?action=chart&ticker1=" . $ticker1_symbol . "&ticker2=" . $ticker2_symbol . "&lag=" . $currentLagHighest . "&date="
                 . $dates[$currentDayHighest] . "&timeFrame=" . $timeFrame . "&actualValue=" . $max . "&calculation_type=" . $calculationType;
 
@@ -162,6 +184,7 @@ $result = $corr->initCorrelationTwoTickers($ticker1, $ticker2, $timeFrame, $lag,
     </table>
 </div>
 
+<!-- table which displays the highest and lowest value in an own div container -->
 <div class="row" id="highLowValues">
     <div class="col-md-6">
         <table class="table table-bordered"

@@ -1,7 +1,9 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 
     $(function () {
@@ -17,26 +19,26 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="font-size: 1.3em">Choose your values for calculation</div>
         <div class="panel-body">
-
             <div class="row">
                 <div class="container">
                     <div class="row">
 
+                        <!-- enter start date -->
                         <div class="col-lg-3">
                             <label>Choose start date:</label>
                             ><input type="text" id="lengthOfPeriod" value="" class="form-control"
                                     placeholder="2016-02-25">
 
                         </div>
+
+                        <!-- enter end date -->
                         <div class="col-lg-3">
                             <label>Choose end date:</label>
                             <input type="text" id="startDate" value="" class="form-control"
                                    placeholder="2016-02-25">
                         </div>
-                        <!--<div class="col-lg-3">
-                            <label>Select length of period:</label>
-                            <input type="text" id="lengthOfPeriod" class="form-control" value="100" min="1" max="24">
-                        </div>-->
+
+                        <!-- select calculation type-->
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="calculation_type">Select calculation type:</label>
@@ -51,6 +53,8 @@
                     </div>
 
                     <div class="row top-buffer">
+
+                        <!-- enter ticker one -->
                         <div class="col-lg-3">
                             <label>Select ticker symbol 1:</label>
                             <input type="search" id="search_ticker1" list="livesearch1" value=""
@@ -58,6 +62,8 @@
                                    placeholder="search ticker (e.g. Apple)">
                             <datalist id="livesearch1"></datalist>
                         </div>
+
+                        <!-- enter ticker two -->
                         <div class="col-lg-3">
                             <label>Select ticker symbol 2:</label>
                             <input type="search" id="search_ticker2" list="livesearch2" value=""
@@ -68,6 +74,8 @@
                     </div>
 
                     <div class="row top-buffer">
+
+                        <!-- select lag -->
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="lag_value">Select lag:</label>
@@ -81,6 +89,7 @@
                             </div>
                         </div>
 
+                        <!-- select timeframe-->
                         <div class="col-lg-3">
                             <label>Select timeframe:</label>
                             <input type="text" class="form-control" id="timeFrame" value="15" min="15"
@@ -89,6 +98,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- button to start calculation -->
             <div class="row remove-button">
                 <div class="col-lg-1">
                     <button type="button" id="create_table_button" class="btn btn-primary">Calculate</button>
@@ -105,57 +116,8 @@
         <div class="panel-body">
             <div class="row" style="margin-left:2px">
                 <div class="container">
-                    <!--	<div class="row">
-                                    <div class="col-lg-3 col-lg-offset-8">
-                                        <button class="btn btn-primary" type="button" onclick="toggler('myContent');">
-                                            Explanation for table colors
-                                            <span class="caret"></span>
-                                        </button>
-                                        <div id="myContent" style="display: none; position:absolute;">
-                                            <table class="table table-bordered"
-                                                   style="border-collapse: collapse;border: 1px solid black; width: 200px">
-                                                <thead>
-                                                <tr>
-                                                    <th style="border: 1px solid black">Color</th>
-                                                    <th style="border: 1px solid black">Explanation</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td bgcolor="#009900" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Significant</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#00CC33" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Weak</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#A0C544" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Very Weak</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#ADA96E" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Very Weak</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#EE9A4D" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Insignificant</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#F88017" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Insignificant</td>
-                                                </tr>
-                                                <tr>
-                                                    <td bgcolor="#a52a2a" style="border: 1px solid black"></td>
-                                                    <td style="border: 1px solid black">Insignificant</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div> -->
+
+                    <!-- response of calculating the cross correlation -->
                     <div id="div_for_table" class="top-buffer">
                     </div>
                 </div>
