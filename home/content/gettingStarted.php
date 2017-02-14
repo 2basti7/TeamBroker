@@ -1,3 +1,5 @@
+<!-- Custom CSS -->
+<!-- Custom Fonts -->
 <style>
     .panel_font_size_big {
         font-size: 1.4em;
@@ -7,8 +9,9 @@
         font-size: 1.1em;
     }
 </style>
-
+<!-- container -->
 <div class="col-md-12">
+    <!-- info of how to use functions -->
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading panel_font_size_big">
@@ -18,6 +21,7 @@
                 <div class="col-md-12">
                     <div class="panel-group" id="accordion1">
                         <div class="panel panel-default">
+                            <!-- contents  -->
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="panel_font_size_small" data-toggle="collapse" data-parent="#accordion1"
@@ -25,6 +29,7 @@
                                         Content of this site</a>
                                 </h4>
                             </div>
+                            <!-- collapsea is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapsea" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     This website gives the user the option to find correlations between selected stocks.
@@ -47,6 +52,7 @@
                                         How to use this site</a>
                                 </h3>
                             </div>
+                            <!-- collapseb is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapseb" class="panel-collapse collapse">
                                 <div class="panel-body">Beside daily and general informations to selected stocks and
                                     companies, the user can choose from different calculation methods.
@@ -64,6 +70,7 @@
                                         Underlying principles</a>
                                 </h3>
                             </div>
+                            <!-- collapsec is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapsec" class="panel-collapse collapse">
                                 <div class="panel-body">To determine the correlation between two stocks, the method of
                                     cross-correlation is used. It describes the correlation between two signals x and y
@@ -74,6 +81,7 @@
                                     that are close to 1 describe a high positive relation. To describe the
                                     correlation-coefficient, the following classification is used:
                                     <ul>
+                                        <!-- info for measuring stocks -->
                                         <li>>= 0.7 : strong significant</li>
                                         <li>>= 0.5 & <= 0.7 : moderate significant</li>
                                         <li>>= 0.3 & < 0.5 : weak</li>
@@ -86,6 +94,7 @@
                     </div>
                 </div>
             </div>
+            <!-- /Controls -->
         </div>
         <div class="panel panel-default">
             <div class="panel-heading panel_font_size_big">
@@ -102,6 +111,7 @@
                                         I. Input variables</a>
                                 </h4>
                             </div>
+                            <!-- collapse_2_1 is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapse_2_1" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="list-group">
@@ -136,6 +146,7 @@
                                         II. Compare two tickers</a>
                                 </h3>
                             </div>
+                            <!-- collapse_2_2 is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapse_2_2" class="panel-collapse collapse">
                                 <div class="panel-body">Der Nutzer wät zwei Ticker aus, ein globales Zeitfenster
                                     (=Anzahl aller Werte), ein Zeitfenster das verschoben werden soll und die maximale
@@ -170,6 +181,7 @@
                                         III. Compare one ticker against all</a>
                                 </h3>
                             </div>
+                            <!-- collapse_2_3 is hidden on larger screens, but visible when the menu is Fading -->
                             <div id="collapse_2_3" class="panel-collapse collapse">
                                 <div class="panel-body">Hier wird anstatt der Auswahl zweier Ticker, lediglich ein
                                     Ticker ausgewät. Dieser Ticker ist der feste Ticker. Dann wird für die angegebenen
@@ -190,4 +202,6 @@
             </div>
         </div>
     </div>
+    <!-- /col-lg-12 -->
 </div>
+<!-- /container -->
