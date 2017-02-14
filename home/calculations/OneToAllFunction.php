@@ -42,6 +42,7 @@ class OneToAllFunction
                 } else {
                     $result = $crossCorrelation->initCorrelationTwoTickers($currentTickerCourse, $tickerCourse, $timeFrame, $lag, count($currentTickerData));
                 }
+				//Calculate average values for correlations for every lag
                 for ($i = 1; $i <= $lag; $i++) {
                     $average = array_sum(array_column($result, $i)) / count($result);
                     $arr = array("average" => $average, "ticker" => $currentTicker, "lag" => $i);
