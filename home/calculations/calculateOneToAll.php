@@ -7,14 +7,15 @@ $oneToAllFunction = new OneToAllFunction();
 
 //Get POST variables and save
 $ticker = strtoupper($_POST["ticker1"]);
-$date = $_POST['startDate'];
-$lengthOfPeriod = $_POST['lengthOfPeriod'];
+$startDate = $_POST['startDate'];
+$endDate = $_POST['endDate'];
 $lag = $_POST['lag'];
 $timeFrame = $_POST['timeFrame'];
 $sort = 0;
 $calculation_type = $_POST['calculation_type'];
 //Calculate crosscorrelation one against all / all against one
-$resultArr = $oneToAllFunction->calculateOneToAll($ticker, $date, $lengthOfPeriod, $lag, $timeFrame, $sort, $calculation_type);
+$resultArr = $oneToAllFunction->calculateTickerAgainstAll($ticker, $startDate, $endDate, $lag, $timeFrame, $sort, $calculation_type);
+$lengthOfPeriod = count($resultArr);
 $res = array_slice($resultArr, 0, 10);
 $resRev = array_reverse(array_slice($resultArr, -10, 10));
 ?>
@@ -40,10 +41,10 @@ $resRev = array_reverse(array_slice($resultArr, -10, 10));
             for ($i = 0; $i < 10; $i++) {
                 echo "<tr>";
                 if ($calculation_type == 1) {
-                    echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $resRev[$i]['ticker'] . '&ticker2=' . $ticker . '&startDate=' . $date . '&lengthOfPeriod=' . $lengthOfPeriod . '&lag_value='
+                    echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $resRev[$i]['ticker'] . '&ticker2=' . $ticker . '&startDate=' . $startDate . '&endDate=' . $endDate . '&lag_value='
                         . $lag . '&timeFrame=' . $timeFrame . '&lag_best=' . $resRev[$i]['lag'] . '">' . $resRev[$i]['ticker'] . '</td>';
                 } else {
-                    echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $ticker . '&ticker2=' . $resRev[$i]['ticker'] . '&startDate=' . $date . '&lengthOfPeriod=' . $lengthOfPeriod . '&lag_value='
+                    echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $ticker . '&ticker2=' . $resRev[$i]['ticker'] . '&startDate=' . $startDate . '&endDate=' . $endDate . '&lag_value='
                         . $lag . '&timeFrame=' . $timeFrame . '&lag_best=' . $resRev[$i]['lag'] . '">' . $resRev[$i]['ticker'] . '</td>';
                 }
                 echo '<td style="color: green" align = "center">' . round($resRev[$i]['average'], 4) . '</td>';
@@ -79,10 +80,10 @@ $resRev = array_reverse(array_slice($resultArr, -10, 10));
 			for ($i = 0; $i < 10; $i++) {
 				echo "<tr>";
 				if ($calculation_type == 1) {
-					echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $res[$i]['ticker'] . '&ticker2=' . $ticker . '&startDate=' . $date . '&lengthOfPeriod=' . $lengthOfPeriod . '&lag_value='
+					echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $res[$i]['ticker'] . '&ticker2=' . $ticker . '&startDate=' . $startDate . '&endDate=' . $endDate . '&lag_value='
 						. $lag . '&timeFrame=' . $timeFrame . '&lag_best=' . $res[$i]['lag'] . '">' . $res[$i]['ticker'] . '</td>';
 				} else {
-					echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $ticker . '&ticker2=' . $res[$i]['ticker'] . '&startDate=' . $date . '&lengthOfPeriod=' . $lengthOfPeriod . '&lag_value='
+					echo '<td><a target="_blank" href="index.php?action=showTwoTickers&ticker1=' . $ticker . '&ticker2=' . $res[$i]['ticker'] . '&startDate=' . $startDate . '&endDate=' . $endDate . '&lag_value='
 						. $lag . '&timeFrame=' . $timeFrame . '&lag_best=' . $res[$i]['lag'] . '">' . $res[$i]['ticker'] . '</td>';
 				}
 				echo '<td style="color: red" align = "center">' . round($res[$i]['average'], 4) . '</td>';

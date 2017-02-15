@@ -11,7 +11,7 @@
     });
 
     $(function () {
-        $("#lengthOfPeriod").datepicker({dateFormat: 'yy-mm-dd'});
+        $("#endDate").datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>
 
@@ -26,7 +26,7 @@
                         <!-- enter start date -->
                         <div class="col-lg-3">
                             <label>Choose start date:</label>
-                            ><input type="text" id="lengthOfPeriod" value="" class="form-control"
+                            <input type="text" id="startDate" value="" class="form-control"
                                     placeholder="2016-02-25">
 
                         </div>
@@ -34,7 +34,7 @@
                         <!-- enter end date -->
                         <div class="col-lg-3">
                             <label>Choose end date:</label>
-                            <input type="text" id="startDate" value="" class="form-control"
+                            <input type="text" id="endDate" value="" class="form-control"
                                    placeholder="2016-02-25">
                         </div>
 

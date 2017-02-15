@@ -53,17 +53,18 @@ sort($favouriteCalculations);
                     <?php
 
                     for ($i = 0; $i < count($favouriteCalculations); $i++) {
-                        $link = 'index.php?action=chart&ticker1=' . $favouriteCalculations[$i]['ticker1'] .
+                        $link = 'index.php?action=compareSite&ticker1=' . $favouriteCalculations[$i]['ticker1'] .
                             '&ticker2=' . $favouriteCalculations[$i]['ticker2'] .
                             '&lag=' . $favouriteCalculations[$i]['lag'] .
-                            '&date=' . $favouriteCalculations[$i]['date'] .
+                            '&startDate=' . $favouriteCalculations[$i]['startDate'] .
+							'&endDate=' . $favouriteCalculations[$i]['endDate'].
                             '&timeFrame=' . $favouriteCalculations[$i]['timeFrame'] .
                             '&actualValue=' . $favouriteCalculations[$i]['actualValue'];
 
                         echo "<tr>";
                         echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['ticker1'] . '</a></td>';
                         echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['ticker2'] . '</a></td>';
-                        echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['date'] . '</a></td>';
+                        echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['startDate'] . '</a></td>';
                         echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['lag'] . '</a></td>';
                         echo '<td><a href = "' . $link . '">' . $favouriteCalculations[$i]['actualValue'] . '</a></td>';
                         echo "</tr>";

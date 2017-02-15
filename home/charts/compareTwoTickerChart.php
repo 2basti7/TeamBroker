@@ -9,7 +9,7 @@ if (isset($_POST['change'])) {
 /*Get all required values by http-POST request*/
 $ticker1 = $_POST["ticker1"];
 $ticker2 = $_POST["ticker2"];
-$date = $_POST["date"];
+$date = $_POST["startDate"];
 $delay = $_POST["delay"];
 $timeFrame = $_POST["days"];
 /*Get coursedata as arrays (course, change, date, ticker) for two tickers*/

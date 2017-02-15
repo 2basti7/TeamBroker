@@ -13,7 +13,7 @@ class OneToAllFunction
 	* @param $calculationType set to 1, if calculating crosscorrelation with fixed ticker to all others; set to 0, if calculating crosscorrelation with all other to fixed ticker
 	* @return array with average correlationcoefficient for each ticker and lag 
 	*/
-    function calculateOneToAll($ticker, $date, $lengthOfPeriod, $lag, $timeFrame, $sort, $calculation_type)
+    function calculateTickerAgainstAll($ticker, $date, $lengthOfPeriod, $lag, $timeFrame, $sort, $calculation_type)
     {
 
         require('../db/Select.php');

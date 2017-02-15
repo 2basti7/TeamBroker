@@ -18,13 +18,13 @@ $(document).ready(function () {
         var ticker1 = $('#search_ticker1').val();
         var ticker2 = $('#search_ticker2').val();
         var calculation_type = $('#calculation_type').val();
-        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
         var lag_value = $('#lag_value').val();
-        var lengthOfPeriod = $('#lengthOfPeriod').val();
+        var startDate = $('#startDate').val();
         var timeFrame = $('#timeFrame').val();
 
         // only send request if all mandatory parameters are selected
-        if (ticker1 !== "" && ticker2 !== "" && startDate !== "" && lengthOfPeriod !== "" && timeFrame !== "") {
+        if (ticker1 !== "" && ticker2 !== "" && startDate !== "" && endDate !== "" && timeFrame !== "") {
             this.disabled = true;
             this.innerHTML = '<x class="fa fa-spinner fa-spin remove-it"></x> Calculating ...';
 
@@ -36,7 +36,7 @@ $(document).ready(function () {
                     ticker1: ticker1,
                     ticker2: ticker2,
                     startDate: startDate,
-                    lengthOfPeriod: lengthOfPeriod,
+                    endDate: endDate,
                     lag: lag_value,
                     timeFrame: timeFrame,
                     calculation_type: calculation_type
@@ -66,13 +66,13 @@ $(document).ready(function () {
         // fetch all necessary parameters
         var ticker1 = $('#search_ticker').val();
         var startDate = $('#startDate').val();
-        var lengthOfPeriod = $('#lengthOfPeriod').val();
+        var endDate = $('#endDate').val();
         var lag_value = $('#lag_value').val();
         var timeFrame = $('#timeFrame').val();
         var calculation_type = $('#calculation_type').val();
 
         // only send request if all mandatory parameters are selected
-        if (ticker1 !== "" && startDate !== "" && lengthOfPeriod !== "" && timeFrame !== "") {
+        if (ticker1 !== "" && startDate !== "" && endDate !== "" && timeFrame !== "") {
             this.disabled = true;
             this.innerHTML = '<x class="fa fa-spinner fa-spin remove-it"></x> Calculating ...';
 
@@ -83,7 +83,7 @@ $(document).ready(function () {
                 data: {
                     ticker1: ticker1,
                     startDate: startDate,
-                    lengthOfPeriod: lengthOfPeriod,
+                    endDate: endDate,
                     lag: lag_value,
                     timeFrame: timeFrame,
                     calculation_type: calculation_type
@@ -170,14 +170,14 @@ $(document).ready(function () {
     });
 
     // iphone function to calculate the cross correlation between two tickers
-    $('.iphone-toggle').on('change', function () {
+    $('.gradientChart').on('change', function () {
         var toggle_data = $(this).data('no-uniform')
         toggle_value = $(this).val();
 
         // fetch all necessary parameters
         var ticker1 = $('#ticker1').val();
         var ticker2 = $('#ticker2').val();
-        var date = $('#date').val();
+        var startDate = $('#startDate').val();
         var delay = $('#delay').val();
         var days = $('#days').val();
         var company = $('#company').val();
@@ -193,7 +193,7 @@ $(document).ready(function () {
             type: "POST",
             url: 'charts/compareTwoTickerChart.php',
             data: {
-                toggle: toggle_data, value: toggle_value, ticker1: ticker1, ticker2: ticker2, date: date, delay: delay,
+                toggle: toggle_data, value: toggle_value, ticker1: ticker1, ticker2: ticker2, startDate: startDate, delay: delay,
                 days: days, change: change, calculation_type: calculation_type, company: company
             }
             // append result of calculation in specified div

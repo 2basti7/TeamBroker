@@ -5,7 +5,7 @@ $ticker2 = $select->getTickerInfo($_GET['ticker2']);
 
 /*Testing if calculation is in favourites*/
 $favouriteCalculations = $_SESSION['favouriteCalculations'];
-$fav = array("ticker1" => $_GET["ticker1"], "ticker2" => $_GET["ticker2"], "lag" => $_GET["lag"], "date" => $_GET["date"], "timeFrame" => $_GET["timeFrame"], "actualValue" => $_GET["actualValue"]);
+$fav = array("ticker1" => $_GET["ticker1"], "ticker2" => $_GET["ticker2"], "lag" => $_GET["lag"], "startDate" => $_GET["startDate"], "endDate" => $_GET["endDate"], "timeFrame" => $_GET["timeFrame"], "actualValue" => $_GET["actualValue"]);
 $existing = -1;
 $heart = "glyphicon-heart-empty";
 $isFav = "true";
@@ -137,20 +137,20 @@ if (isset($_GET['fav'])) {
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Calculated with values:<a
-                                href="<?= 'index.php?action=chart&ticker1=' . $_GET["ticker1"] . '&ticker2=' . $_GET["ticker2"] . '&lag=' . $_GET["lag"] . '&date=' . $_GET["date"] .
-                                '&timeFrame=' . $_GET["timeFrame"] . '&actualValue=' . $_GET["actualValue"] . '&fav=' . $isFav ?>"
+                                href="<?= 'index.php?action=compareSite&ticker1=' . $_GET["ticker1"] . '&ticker2=' . $_GET["ticker2"] . '&lag=' . $_GET["lag"] . '&startDate=' . $_GET["startDate"] .
+                                '&endDate=' . $_GET["endDate"] . '&actualValue=' . $_GET["actualValue"] . '&fav=' . $isFav ."&timeFrame=".$_GET["timeFrame"] ?>"
                         "><span class="glyphicon <?= $heart ?> pull-right"></span></a></div>
 
                     <div class="panel-body">
                         <table class="table">
                             <tbody>
                             <tr>
-                                <td>Date:</td>
-                                <td><?= $_GET['date'] ?></td>
+                                <td>Start date:</td>
+                                <td><?= $_GET['startDate'] ?></td>
                             </tr>
                             <tr>
-                                <td>Timeframe:</td>
-                                <td><?= $_GET['timeFrame'] ?></td>
+                                <td>End date:</td>
+                                <td><?= $_GET['endDate'] ?></td>
                             </tr>
                             <tr>
                                 <td>Lag:</td>
@@ -162,15 +162,21 @@ if (isset($_GET['fav'])) {
                             </tr>
                             <tr>
                                 <td>Gradient chart:</td>
+								<input = "text" id = "startDate" value="<?= $_GET['startDate'] ?>" hidden>
+								<input = "text" id = "days" value="<?= $_GET['timeFrame'] ?>" hidden>
+								<input = "text" id = "delay" value="<?= $_GET['lag'] ?>" hidden>
+								<input = "text" id = "company" value="<?= $ticker2["Company"] ?>" hidden>
+								<input = "text" id = "ticker1" value="<?= $ticker1["Ticker"] ?>" hidden>
+								<input = "text" id = "ticker2" value="<?= $ticker2["Ticker"] ?>" hidden>
                                 <td><?php
                                     if (isset($_GET["calculation_type"])) {
                                         if ($_GET["calculation_type"] == "true") {
-                                            echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="iphone-toggle" checked>';
+                                            echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="gradientChart" checked>';
                                         } else {
-                                            echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="iphone-toggle">';
+                                            echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="gradientChart">';
                                         }
                                     } else {
-                                        echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="iphone-toggle">';
+                                        echo '<input id="calculation_type" data-no-uniform="true" type="checkbox" class="gradientChart">';
                                     } ?>
                             </tr>
                             </tbody>
@@ -178,12 +184,7 @@ if (isset($_GET['fav'])) {
                     </div>
 
                 </div>
-                <input = "text" id = "date" value="<?= $_GET['date'] ?>" hidden>
-                <input = "text" id = "days" value="<?= $_GET['timeFrame'] ?>" hidden>
-                <input = "text" id = "delay" value="<?= $_GET['lag'] ?>" hidden>
-                <input = "text" id = "company" value="<?= $ticker2["Company"] ?>" hidden>
-                <input = "text" id = "ticker1" value="<?= $ticker1["Ticker"] ?>" hidden>
-                <input = "text" id = "ticker2" value="<?= $ticker2["Ticker"] ?>" hidden>
+                
                 <div id="chart" class="row top-buffer">
 
 
@@ -192,7 +193,7 @@ if (isset($_GET['fav'])) {
                     $_POST["ticker1"] = $_GET["ticker1"];//"AAPL";
                     $_POST["ticker2"] = $_GET["ticker2"];//"GOOG";
                     $_POST["company"] = $ticker2["Company"];
-                    $_POST["date"] = $_GET["date"];//"2016-02-12";
+                    $_POST["startDate"] = $_GET["startDate"];//"2016-02-12";
                     $_POST["days"] = $_GET["timeFrame"];//"30";
                     $_POST["delay"] = $_GET["lag"];//"5";
                     $_POST["actualValue"] = $_GET["actualValue"];

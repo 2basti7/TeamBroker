@@ -18,9 +18,9 @@ class Select
         $conn = $con->con();
 
         if ($sort == 0) {
-            $sql = "SELECT * FROM dbo.table_historical WHERE TICKER = '$ticker' AND DATE <= '$date' AND DATE >= '$enddate' ORDER BY DATE DESC";
+            $sql = "SELECT * FROM dbo.table_historical WHERE TICKER = '$ticker' AND DATE >= '$date' AND DATE <= '$enddate' ORDER BY DATE DESC";
         } else {
-            $sql = "SELECT * FROM dbo.table_historical WHERE TICKER = '$ticker' AND DATE <= '$date' AND DATE >= '$enddate' ORDER BY DATE ASC";
+            $sql = "SELECT * FROM dbo.table_historical WHERE TICKER = '$ticker' AND DATE >= '$date' AND DATE <= '$enddate' ORDER BY DATE ASC";
         }
 
         $stmt = sqlsrv_query($conn, $sql);
