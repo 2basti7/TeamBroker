@@ -1,25 +1,12 @@
+<!-- Script ui to insert a new ticker with values given by user -->
+
 <?php
+/*Getting all exchangesymbols from database*/
 $exchanges = $select->getExchanges();
 ?>
 
 <div class="col-md-12">
-    <!--<div class="panel panel-default">
-        <div class="panel-heading">
-			<h4 class="panel-title">
-				<a class="panel_font_size_small" data-toggle="collapse" data-parent="#accordion1"
-                                       href="#collapsea">
-                                        Explanation</a>
-			</h4>
-		</div>
-        <div id="collapsea" class="panel-collapse collapse out">
-			<div class="panel-body">
-            Insert a new tickersymbol with information. <br>
-			The historical data will be inserted automatically and the current data will be collected.
-			</div>
-        </div>
-    </div>-->
-
-
+<!-- User has to give values to insert in database-->
     <div class="panel panel-default">
         <div class="panel-heading" style="font-size: 1.3em">Choose your values for inserting</div>
         <div class="panel-body">

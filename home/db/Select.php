@@ -1,7 +1,15 @@
 <?php
-
+/*Select scripts to get values from database*/
 class Select
 {
+	/*
+	*function to get an array with all change, closeCourse, date and ticker values as array for given timeperiod and tickersymbol
+	*@Param $ticker: tickersymbol 
+	*@Param $date: startdate
+	*@Param $enddate: enddate
+	*@Param $sort: sorting asc or desc by date
+	*@Return array with change, closeCourse, ticker and date for every day between startdate and enddate
+	*/
     function selectByTicker($ticker, $date, $enddate, $sort)
     {
         require_once 'Connect.php';
@@ -44,6 +52,7 @@ class Select
 
     }
 
+	
     function selectByTicker2($ticker, $date, $count, $sort)
     {
         require_once 'Connect.php';
@@ -86,6 +95,11 @@ class Select
 
     }
 
+	/*
+	*function to get tickerinfo as array for one ticker
+	*@Param $ticker: tickersymbol to get informations for
+	*@Return: all informations about ticker as array (exchange, country, company, marketCapacity, IPO year, category, link)
+	*/
     function getTickerInfo($ticker)
     {
         require_once 'Connect.php';
@@ -102,10 +116,6 @@ class Select
         $result = array();
 
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-
-            //$change = $row['CloseCourse'];
-
-            //array_push($result, $change);
             return $row;
         }
 
@@ -114,6 +124,10 @@ class Select
         return $result;
     }
 
+	/*
+	*function to get exchange, company and ticker for all tickersymbols
+	'@Return multidimensional array with information about ticker, company and exchange for each ticker
+	*/
     function getAllTickerInfo()
     {
         require_once 'Connect.php';
@@ -130,8 +144,6 @@ class Select
         $result = array();
 
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_NUMERIC)) {
-
-            //$change = $row['CloseCourse'];
             $ticker = $row['0'];
             $company = $row['1'];
             $exchange = $row['2'];
@@ -139,16 +151,19 @@ class Select
             $arr = array("ticker" => $ticker, "exchange" => $exchange, "company" => $company);
 
             array_push($result, $arr);
-            //return $row;
         }
-
-//sqlsrv_free_stmt( $stmt);
         sqlsrv_close($conn);
         return $result;
     }
 
+	/*
+	*function to get highest or lowest course of historical data (latest data)
+	*@Param $count: number of results
+	*@Param $order: 0 if highest values, 1 if lowest values
+	*@Return highest and lowest values
+	*/
     function getHighestCourses($count, $order)
-    {        //Order: 0 if sorting desc, 1 if sorting asc
+    {        
         require_once 'Connect.php';
         $con = new Connect();
 
@@ -179,6 +194,11 @@ class Select
         return $result;
     }
 
+	/*
+	*function to search for tickers, exchange and companies containing given string
+	*@Param $search: String to search for
+	*@Return array containing all tickers, companies and exchanges that contain the searchstring
+	*/
     function getSearchTicker($search)
     {
         require_once 'Connect.php';
@@ -207,6 +227,12 @@ class Select
         return $result;
     }
 
+	/*
+	*function to get current change values
+	*@Param $ticker: tickersymbol
+	*@Param $date: hour as int
+	*@Return array containing change (all values in database) for given ticker and hour
+	*/
     function getCurrentChangeByTickerAndDate($ticker, $date)
     {
         require_once 'Connect.php';
@@ -234,6 +260,10 @@ class Select
         return $result;
     }
 
+	/*
+	*function to get exchangesymbols
+	*@Return array with exchangesymbols
+	*/
     function getExchanges()
     {
         require_once 'Connect.php';
@@ -261,6 +291,10 @@ class Select
         return $result;
     }
 
+	/*
+	*function to get current values of 1000 random tickers from database
+	*@Return array with tickersymbols and currentchanges
+	*/
     function getCurrentValues()
     {
         require_once 'Connect.php';
@@ -287,36 +321,6 @@ class Select
 
         sqlsrv_free_stmt($stmt);
 //sqlsrv_close($conn);
-        return $result;
-    }
-
-    function getNNewestCoursesWithDates($ticker, $n)
-    {
-        require_once 'Connect.php';
-        $con = new Connect();
-
-        $conn = $con->con();
-
-        $sql = "SELECT TOP $n Change, Date FROM dbo.table_historical WHERE Ticker = '$ticker' ORDER BY Date DESC;";
-        $stmt = sqlsrv_query($conn, $sql);
-        if ($stmt === false) {
-            die(print_r(sqlsrv_errors(), true));
-        }
-
-        $result = array();
-
-        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-
-            $tempArr = array(
-                "change" => $row['Change'],
-                "date" => $row['Date']
-            );
-
-            array_push($result, $tempArr);
-        }
-
-        sqlsrv_free_stmt($stmt);
-        //sqlsrv_close($conn);
         return $result;
     }
 }

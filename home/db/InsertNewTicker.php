@@ -1,7 +1,9 @@
 <?php
+/*Script for inserting a new ticker with all informations into database and updating historical data*/
 require_once 'Connect.php';
 $con = new Connect();
 
+/*Values that are neccesarry to insert into database*/
 $conn = $con->con();
 $ticker = $_POST["ticker"];
 $company = $_POST["company"];
@@ -12,14 +14,12 @@ $ipoYear = $_POST["ipoYear"];
 $link = $_POST["infoLink"];
 $category = $_POST["category"];
 
+/*Try to insert ticker into database and get data from yahoo*/
 if (testIfTickerExistingInDatabase()) {
     echo '<div class="alert alert-danger">Sorry, ticker already existing!</div>';
 } else {
-    //echo "<label>Trying to insert ticker..</label><br>";
     if (testIfTickerExistingAtYahoo()) {
-        //echo "<label>Got tickerdata and inserted into database!</label><br>";
         if (insertIntoTickerInfoDB()) {
-            //echo "<label>Inserted ticker information into database!</label><br>";
             echo "<div class='alert alert-success'><strong>Inserted ticker!</strong> You are now able to use your new ticker!</div><br>";
         } else {
             echo "<label>Tickerinfo insert failed!</label><br>";
@@ -29,6 +29,10 @@ if (testIfTickerExistingInDatabase()) {
     }
 }
 
+/*
+*test if ticker is already existing in database
+*@Return true if already existing in database, false if not existing
+*/
 function testIfTickerExistingInDatabase()
 {
     global $conn;
@@ -46,6 +50,10 @@ function testIfTickerExistingInDatabase()
     }
 }
 
+/*
+*Getting maxdate from database to know until which date to insert the historical data
+*@Return maxdate from database
+*/
 function selectMaxDate()
 {
     global $conn;
@@ -60,6 +68,11 @@ function selectMaxDate()
     }
 }
 
+/*
+*tests if ticker is existing at the yahoo database
+*if it exists, table_historical will be updated for new ticker
+*@Return false if ticker is not existing, true if ticker is existing
+*/
 function testIfTickerExistingAtYahoo()
 {
 
@@ -131,6 +144,9 @@ function reverseCsv($file)
     return array_reverse($rows);
 }
 
+/*
+*insert tickerinfo into table_tickerInfo
+*/
 function insertIntoTickerInfoDB()
 {
     global $conn;

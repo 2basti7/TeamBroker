@@ -169,54 +169,6 @@ $(document).ready(function () {
         }
     });
 
-
-    // start calculation to get a prediction for one ticker
-    $('#prediction').click(function () {
-
-        // fetch all necessary parameters
-        var ticker_prediction = $('#ticker_prediction').val();
-        var days_back = $('#days_back').val();
-        var ticker_prediction_n = $('#ticker_prediction_n').val();
-
-        // ticker, days back and n are mandatory fields
-        if (ticker_prediction !== "" && days_back !== "" && ticker_prediction_n !== "") {
-            this.disabled = true;
-            this.innerHTML = '<x class="fa fa-spinner fa-spin remove-it"></x> Calculating ...';
-
-            // send ajax post request with parameters to PredictionForOne.php
-            $.ajax({
-                type: 'POST',
-                url: "calculations/predictionForOne.php",
-                data: {
-                    ticker_prediction: ticker_prediction,
-                    days_back: days_back,
-                    ticker_prediction_n: ticker_prediction_n
-                }
-                // append result of calculation in specified div
-            }).done(function (table_content) {
-                $('#div_for_prediction').empty().append(table_content);
-                $('#prediction').prop('disabled', false).text('Prediction');
-            });
-        } else {
-            alert("Please fill in all fields!");
-        }
-
-
-    });
-
-    /*$('a[href*=#]:not([href=#])').click(function() {
-     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') || location.hostname == this.hostname) {
-     var target = $(this.hash);
-     target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-     if (target.length) {
-     $('html,body').animate({
-     scrollTop: target.offset().top
-     }, 1);
-     return false;
-     }
-     }
-     });*/
-
     // iphone function to calculate the cross correlation between two tickers
     $('.iphone-toggle').on('change', function () {
         var toggle_data = $(this).data('no-uniform')

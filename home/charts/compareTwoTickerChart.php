@@ -1,34 +1,42 @@
 <?php
+
+/*Display two charts, one to compare two tickers and one to compare two tickers with one shifted*/
 if (isset($_POST['change'])) {
     require('../db/Select.php');
     $select = new Select();
 }
-$ticker1 = $_POST["ticker1"];//'AAPL';
+
+/*Get all required values by http-POST request*/
+$ticker1 = $_POST["ticker1"];
 $ticker2 = $_POST["ticker2"];
 $date = $_POST["date"];
 $delay = $_POST["delay"];
 $timeFrame = $_POST["days"];
+/*Get coursedata as arrays (course, change, date, ticker) for two tickers*/
 $data = $select->selectByTicker2($ticker1, $date, $timeFrame, 1);
 $data2 = $select->selectByTicker2($ticker2, $date, $timeFrame + $delay, 1);
-$ticker1Data = array_column($data, 'change');//$select->getCourseChangeByTicker($ticker1, $date, $timeFrame, 1);
-$ticker2Data = array_column($data2, 'change');//$select->getCourseChangeByTicker($ticker2, $date, $timeFrame + $delay, 1);
 
+/*Create two arrays with change only*/
+$ticker1Data = array_column($data, 'change');
+$ticker2Data = array_column($data2, 'change');
+
+/*Create array with dateinfo*/
 $days = array_column($data, 'date');//$select->getCourseDateByTicker($ticker1, $date, $timeFrame, 1);
 
+/*Create array to be shifted*/
 $ticker3Data = array_slice($ticker2Data, $delay);
 
 $calculationType = "false";
 if (isset($_POST['calculation_type'])) {
     $calculationType = $_POST['calculation_type'];
 }
-
-//echo $calculationType;
 if ($calculationType == "true") {
     $ticker1Data = convert($ticker1Data);
     $ticker2Data = convert($ticker2Data);
     $ticker3Data = convert($ticker3Data);
 }
 
+/*Help function to convert array into gradient array (-1,0,1)*/
 function convert($arr)
 {
     $help = array();
@@ -46,6 +54,7 @@ function convert($arr)
 
 ?>
 
+<!-- Create original chart with help of Chart.js --> 
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">Original charts</div>
@@ -107,7 +116,7 @@ function convert($arr)
     });
 </script>
 
-
+<!-- Create shifted chart with help of Chart.js -->
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading"><?= $_POST['company'] ?> shifted for <?= $delay ?> days</div>

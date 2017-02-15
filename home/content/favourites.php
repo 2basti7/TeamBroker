@@ -1,7 +1,9 @@
 <?php
+/*Getting favourite tickersymbols from session*/
 $favourites = $_SESSION['favourites'];
 sort($favourites);
 
+/*Getting favourite calculations from session*/
 $favouriteCalculations = $_SESSION['favouriteCalculations'];
 sort($favouriteCalculations);
 ?>
@@ -9,6 +11,7 @@ sort($favouriteCalculations);
 <div class="col-md-12">
     <div class="col-md-6">
         <div class="panel panel-success">
+		<!-- Display favourite tickers -->
             <div class="panel-heading">Favourite tickers</div>
             <div class="panel-body">
                 <table class="table">
@@ -35,6 +38,7 @@ sort($favouriteCalculations);
     </div>
     <div class="col-md-6">
         <div class="panel panel-success">
+			<!-- Display favourite calculations -->
             <div class="panel-heading">Favourite calculations</div>
             <div class="panel-body">
                 <table class="table">

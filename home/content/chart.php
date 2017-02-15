@@ -1,7 +1,9 @@
 <?php
+/*Creating arrays with all informations about tickers*/
 $ticker1 = $select->getTickerInfo($_GET['ticker1']);
 $ticker2 = $select->getTickerInfo($_GET['ticker2']);
 
+/*Testing if calculation is in favourites*/
 $favouriteCalculations = $_SESSION['favouriteCalculations'];
 $fav = array("ticker1" => $_GET["ticker1"], "ticker2" => $_GET["ticker2"], "lag" => $_GET["lag"], "date" => $_GET["date"], "timeFrame" => $_GET["timeFrame"], "actualValue" => $_GET["actualValue"]);
 $existing = -1;
@@ -11,10 +13,6 @@ if (($key = array_search($fav, $favouriteCalculations)) !== false) {
     $existing = $key;
     $heart = "glyphicon-heart";
     $isFav = "false";
-    //$existing = 1;
-    //echo "existing";
-} else {
-    //echo "not existing";
 }
 if (isset($_GET['fav'])) {
 
@@ -36,11 +34,10 @@ if (isset($_GET['fav'])) {
 
 ?>
 
+<!-- Show ticker info for both tickers -->
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">Compare <?= $ticker1["Company"] . " and " . $ticker2["Company"] ?>
-
-
         </div>
         <div class="panel-body">
 
@@ -136,6 +133,7 @@ if (isset($_GET['fav'])) {
                 </div>
             </div>
 
+			<!-- Show values that are used for calculation. Getting these values by HTTP-GET request -->
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Calculated with values:<a
@@ -189,7 +187,8 @@ if (isset($_GET['fav'])) {
                 <div id="chart" class="row top-buffer">
 
 
-                    <?php
+                <?php
+				/*Creating charts by including compareTwoTickerChart.php and giving values by HTTP-POST request*/
                     $_POST["ticker1"] = $_GET["ticker1"];//"AAPL";
                     $_POST["ticker2"] = $_GET["ticker2"];//"GOOG";
                     $_POST["company"] = $ticker2["Company"];

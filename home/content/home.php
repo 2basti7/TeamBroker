@@ -1,7 +1,9 @@
 <?php
+/*Getting top 10 and worst 10 tickerchanges from last trading day in database*/
 $best = $select->getHighestCourses('10', '0');
 $worst = $select->getHighestCourses('10', '1');
 
+/*Getting some random tickers with (current/hourly) change from database*/
 $allTickers = $select->getCurrentValues();
 shuffle($allTickers);
 
@@ -75,6 +77,8 @@ shuffle($allTickers);
         </div>
     </div>
 </div>
+
+<!-- Display best and worst 10 tickers-->
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-6">
@@ -118,6 +122,7 @@ shuffle($allTickers);
         </div>
     </div>
 </div>
+<!-- Display random tickers-->
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-12">

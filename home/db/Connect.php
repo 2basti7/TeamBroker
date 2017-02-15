@@ -1,10 +1,10 @@
 <?php
-
+/*Class to connect to database*/
 class connect
 {
     function con()
     {
-        $serverName = "BTN4NV04\PROJEKTE2016"; //serverName\instanceName
+        $serverName = "BTN4NV04\PROJEKTE2016";
         $connectionInfo = array("Database" => "TeamBroker");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
